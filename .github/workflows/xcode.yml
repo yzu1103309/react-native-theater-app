@@ -61,11 +61,11 @@ jobs:
       run: cd ./ios && pod install
     
     - name: 👷 Build app
-      run: cd ./ios && ls && xcodebuild -scheme Theater -workspace Theater.xcworkspace -configuration Release clean archive -archivePath "build/Theater.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: cd ./ios && ls && xcodebuild -scheme Theater -workspace Theater.xcworkspace -configuration Release clean archive -archivePath "build/Theater.xcarchive" -quiet CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
     - name: 📱 Upload binary
       uses: actions/upload-artifact@v2
       with:
         name: app.xcarchive
-        path: build/Theater.xcarchive
+        path: ./ios/build/Theater.xcarchive
       

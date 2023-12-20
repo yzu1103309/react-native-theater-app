@@ -28,6 +28,13 @@ jobs:
       matrix:
         node: [18.x]
     steps:
+    - name: Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
+          
     - name: 🏗 Setup repo
       uses: actions/checkout@v2
 
@@ -52,11 +59,7 @@ jobs:
 
     - name: 👷 Build app
       run: |
-        eas build --local \
-          --non-interactive \
-          --output=./app-build \
-          --platform=${{ github.event.inputs.platform }} \
-          --profile=${{ github.event.inputs.profile }}
+        eas build --local --non-interactive --output=./app-build --platform=${{ github.event.inputs.platform }} --profile=${{ github.event.inputs.profile }}
 
     - name: 📱 Upload binary
       uses: actions/upload-artifact@v2

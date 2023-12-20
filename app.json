@@ -12,6 +12,9 @@
       "package": "com.wilson920430.theater"
     },
     "ios": {
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["vlc-x-callback"]
+      },
       "bundleIdentifier": "com.wilson920430.theater"
     }
   }

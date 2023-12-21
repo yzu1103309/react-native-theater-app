@@ -1,4 +1,4 @@
-name: Build App
+name: Build Android
 on:
   workflow_dispatch:
     inputs:
@@ -6,8 +6,8 @@ on:
         type: choice
         description: OS to build on. Ubuntu is faster, MacOS supports iOS builds, Windows is unsupported
         options:
-          - macos-latest
           - ubuntu-latest
+          - macos-latest
       platform:
         type: choice
         description: Platform to build for
@@ -18,9 +18,9 @@ on:
         type: choice
         description: Build profile to use
         options:
-          - development
-          - preview
           - production
+          - preview
+          - development
 jobs:
   build:
     runs-on: ${{ github.event.inputs.os }}

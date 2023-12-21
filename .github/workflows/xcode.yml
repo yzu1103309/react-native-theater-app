@@ -18,9 +18,9 @@ on:
         type: choice
         description: Build profile to use
         options:
-          - development
-          - preview
           - production
+          - preview
+          - development
 jobs:
   build:
     runs-on: ${{ github.event.inputs.os }}

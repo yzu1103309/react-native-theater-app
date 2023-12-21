@@ -21,6 +21,7 @@ const HomeScreen = () => {
         <Text style={styles.title}>Online Theater</Text>
         <SegmentedControl
           values={['Movies', 'TV Shows']}
+          appearance={'light'}
           selectedIndex={selectedIndex}
           onChange={event => {
             setSelected(event.nativeEvent.selectedSegmentIndex);

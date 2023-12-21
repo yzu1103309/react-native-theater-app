@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Animated, StatusBar} from 'react-native';
+import { Animated, Platform, StatusBar } from "react-native";
 import useSWR from 'swr';
 import LoginScreen from '../screens/LoginScreen';
 import tabNavigator from './TabNavigator';
@@ -13,6 +13,7 @@ import {
   HeaderStyleInterpolators,
   TransitionSpecs,
 } from '@react-navigation/stack';
+import {colors} from '../constants/theme';
 
 const Stack = createStackNavigator();
 
@@ -39,9 +40,14 @@ const MyTransition = ({current, next, layouts}) => {
 
 const MainNavigator = () => {
   let {data: user} = useSWR(['auth/status', {throwHttpErrors: true}]);
+  let statusBarHidden = Platform.OS !== 'android';
   return (
     <NavigationContainer>
-      <StatusBar hidden />
+      <StatusBar
+        hidden={statusBarHidden}
+        backgroundColor={colors.light}
+        barStyle={'light-content'}
+      />
       <Stack.Navigator>
         <Stack.Screen
           name="Root"

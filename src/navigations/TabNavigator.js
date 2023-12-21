@@ -3,11 +3,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FavoriteScreen from '../screens/FavoriteScreen';
 import Icon from '../components/shared/Icon';
 import {colors, sizes} from '../constants/theme';
-import {StyleSheet, Animated} from 'react-native';
+import {StyleSheet, Animated, Platform} from 'react-native';
 import HomeNavigator from './HomeNavigator';
 import SearchNavigator from './SearchNavigator';
 import UserScreen from '../screens/UserScreen';
-import RequestScreen from "../screens/RequestScreen";
+import RequestScreen from '../screens/RequestScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -76,18 +76,20 @@ const TabNavigator = () => {
           );
         })}
       </Tab.Navigator>
-      <Animated.View
-        style={[
-          styles.indicator,
-          {
-            transform: [
-              {
-                translateX: offsetAnimation,
-              },
-            ],
-          },
-        ]}
-      />
+      {Platform.OS !== 'android' && (
+        <Animated.View
+          style={[
+            styles.indicator,
+            {
+              transform: [
+                {
+                  translateX: offsetAnimation,
+                },
+              ],
+            },
+          ]}
+        />
+      )}
     </>
   );
 };

@@ -101,7 +101,9 @@ const MediaDetailsScreen = ({navigation, route}) => {
           </View>
           <View style={styles.rightContainer}>
             <View style={styles.titleContainer}>
-              <Text numberOfLines={1} style={{fontSize: 18, maxWidth: '55%'}}>{item.title}</Text>
+              <Text numberOfLines={1} style={{fontSize: 18, maxWidth: '55%'}}>
+                {item.title}
+              </Text>
               <Text style={{fontSize: 12, marginTop: '2%'}}>
                 國家：{item.country}、年份：{item.year}
               </Text>
@@ -128,53 +130,55 @@ const MediaDetailsScreen = ({navigation, route}) => {
         </LinearGradient>
       </ImageBackground>
       <View style={styles.content}>
-        <View style={styles.plotContainer}>
+        <View>
           <Text style={{fontSize: 16, marginBottom: spacing.s}}>
             劇情簡介：
           </Text>
           <Text>{item.plot}</Text>
         </View>
-        <View style={styles.btnContainer}>
+        <View>
+          <View style={styles.btnContainer}>
+            <Button
+              theme={{primaryColor: '#03B3E3'}}
+              style={[styles.btn, {width: '49%'}]}
+              innerStyle={styles.btnText}
+              inverted
+              rounded
+              onPress={() => {
+                navigation.navigate('TMDB', {type: item.type, tmdb: item.tmdb});
+              }}>
+              TMDB
+            </Button>
+            <Button
+              theme={{primaryColor: '#F5C518'}}
+              color={'black'}
+              style={[styles.btn, {width: '49%'}]}
+              innerStyle={styles.btnText}
+              inverted
+              rounded
+              onPress={() => {
+                navigation.navigate('IMDB', {imdb: item.id});
+              }}>
+              IMDB
+            </Button>
+          </View>
           <Button
-            theme={{primaryColor: '#03B3E3'}}
-            style={[styles.btn, {width: '49%'}]}
+            theme={{primaryColor: '#2ECC71'}}
+            style={styles.btn}
             innerStyle={styles.btnText}
             inverted
             rounded
             onPress={() => {
-              navigation.navigate('TMDB', {type: item.type, tmdb: item.tmdb});
+              if (item.type === 'movies') {
+                openURL();
+              } else {
+                navigation.navigate('EPList', {id: item.id});
+              }
             }}>
-            TMDB
-          </Button>
-          <Button
-            theme={{primaryColor: '#F5C518'}}
-            color={'black'}
-            style={[styles.btn, {width: '49%'}]}
-            innerStyle={styles.btnText}
-            inverted
-            rounded
-            onPress={() => {
-              navigation.navigate('IMDB', {imdb: item.id});
-            }}>
-            IMDB
+            {(item.type === 'movies' && '▶ 立即觀看') ||
+              (item.type === 'tvshows' && '▲ 查看劇集清單')}
           </Button>
         </View>
-        <Button
-          theme={{primaryColor: '#2ECC71'}}
-          style={styles.btn}
-          innerStyle={styles.btnText}
-          inverted
-          rounded
-          onPress={() => {
-            if (item.type === 'movies') {
-              openURL();
-            } else {
-              navigation.navigate('EPList', {id: item.id});
-            }
-          }}>
-          {(item.type === 'movies' && '▶ 立即觀看') ||
-            (item.type === 'tvshows' && '▲ 查看劇集清單')}
-        </Button>
       </View>
     </View>
   );
@@ -190,6 +194,9 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: spacing.l + 4,
+    paddingBottom: spacing.l,
+    justifyContent: 'space-between',
+    flex: 1,
   },
   backButton: {
     position: 'absolute',
@@ -268,9 +275,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     marginLeft: 5,
-  },
-  plotContainer: {
-    height: '64%',
   },
   btnContainer: {
     flexDirection: 'row',

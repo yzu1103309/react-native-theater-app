@@ -57,6 +57,9 @@ jobs:
     - name: 📦 Install dependencies
       run: yarn
 
+    - name: 📦 Prebuild app
+      run: expo prebuild --platform ${{ github.event.inputs.platform }}
+
     - name: 👷 Build app
       run: |
         eas build --local --non-interactive --output=./app-build --platform=${{ github.event.inputs.platform }} --profile=${{ github.event.inputs.profile }}

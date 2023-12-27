@@ -20,6 +20,7 @@ export const shadow = {
       width: 0,
       height: 2,
     },
+    elevation: 3,
   },
   dark: {
     shadowColor: colors.black,
@@ -29,6 +30,7 @@ export const shadow = {
       width: 0,
       height: 2,
     },
+    elevation: 5,
   },
 };
 

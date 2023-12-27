@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
       width: 3,
       height: 3,
     },
+    elevation: 2,
   },
   scroll: {
     marginBottom: '10%',

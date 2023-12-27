@@ -101,10 +101,10 @@ const MediaDetailsScreen = ({navigation, route}) => {
           </View>
           <View style={styles.rightContainer}>
             <View style={styles.titleContainer}>
-              <Text numberOfLines={1} style={{fontSize: 18, maxWidth: '55%'}}>
+              <Text numberOfLines={1} style={{fontSize: 18, maxWidth: '55%', fontWeight: '700'}}>
                 {item.title}
               </Text>
-              <Text style={{fontSize: 12, marginTop: '2%'}}>
+              <Text style={{fontSize: 12, marginTop: 5, fontWeight: '600'}}>
                 國家：{item.country}、年份：{item.year}
               </Text>
               <View style={styles.stars}>
@@ -134,7 +134,7 @@ const MediaDetailsScreen = ({navigation, route}) => {
           <Text style={{fontSize: 16, marginBottom: spacing.s}}>
             劇情簡介：
           </Text>
-          <Text>{item.plot}</Text>
+          <Text numberOfLines={15}>{item.plot}</Text>
         </View>
         <View>
           <View style={styles.btnContainer}>
@@ -224,14 +224,14 @@ const styles = StyleSheet.create({
       width: 3,
       height: 3,
     },
+    elevation: 2,
   },
   btnText: {
     fontWeight: 'bold',
   },
   poster: {
-    width: '100%',
     height: '100%',
-    borderRadius: 15,
+    backgroundColor: 'transparent',
   },
   posterContainer: {
     height: '70%',
@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
       width: 3,
       height: 3,
     },
+    backgroundColor: 'transparent',
   },
   titleContainer: {
     height: '27%',
@@ -259,7 +260,7 @@ const styles = StyleSheet.create({
   stars: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginTop: '2%',
+    marginTop: 7,
     marginLeft: '-0.5%',
   },
   fullStar: {

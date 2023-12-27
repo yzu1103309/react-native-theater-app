@@ -1,8 +1,8 @@
 import React from 'react';
-import {Alert, Button, Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import {client} from '../apis/common';
-import {useNavigation} from '@react-navigation/native';
 import {useSWRConfig} from 'swr';
+import {Button} from 'react-native-ios-kit';
 
 const UserScreen = () => {
   const {mutate} = useSWRConfig();
@@ -28,7 +28,7 @@ const UserScreen = () => {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>User Page</Text>
-      <Button title={'Logout'} onPress={() => logout()} />
+      <Button onPress={() => logout()} >Logout</Button>
     </View>
   );
 };

@@ -40,18 +40,10 @@ const MyTransition = ({current, next, layouts}) => {
 };
 
 const MainNavigator = () => {
-  let {data: user, isLoading} = useSWR(['auth/status', {throwHttpErrors: true}]);
+  let {data: user} = useSWR(['auth/status', {throwHttpErrors: true}]);
   let statusBarHidden = Platform.OS !== 'android';
   return (
     <NavigationContainer>
-      <Spinner
-        visible={isLoading}
-        textContent={'Connecting...'}
-        textStyle={{fontSize: sizes.body, color: colors.gray}}
-        overlayColor={'rgba(255,255,255,0.8)'}
-        color={colors.black}
-        animation={'fade'}
-      />
       <StatusBar
         hidden={statusBarHidden}
         backgroundColor={colors.light}

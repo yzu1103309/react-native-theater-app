@@ -15,11 +15,13 @@ import {colors, shadow, sizes, spacing} from '../constants/theme';
 import {client} from '../apis/common';
 import {HTTPError} from 'ky';
 import {useSWRConfig} from 'swr';
+import Spinner from "react-native-loading-spinner-overlay";
 
 const LoginScreen = () => {
   const {mutate} = useSWRConfig();
   const [user_name, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   async function login(user_name, password) {
     if(user_name === '')
     {
@@ -31,6 +33,7 @@ const LoginScreen = () => {
     }
     else
     {
+      setLoading(true);
       await client
         .post('auth/signin', {
           json: {
@@ -42,9 +45,10 @@ const LoginScreen = () => {
           if (e instanceof HTTPError && e.response.status === 403) {
             Alert.alert('帳號或密碼錯誤！');
           } else {
-            Alert.alert('發生錯誤，請稍後再試');
+            Alert.alert('發生錯誤 \n 請檢查網路及VPN狀態');
           }
         });
+      setLoading(false);
     }
   }
   return (
@@ -53,6 +57,14 @@ const LoginScreen = () => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
+          <Spinner
+            visible={loading}
+            textContent={'Connecting...'}
+            textStyle={{fontSize: sizes.body, color: colors.gray}}
+            overlayColor={'rgba(255,255,255,0.8)'}
+            color={colors.black}
+            animation={'fade'}
+          />
           <View>
             <Text style={styles.title}>Welcome!</Text>
             <TextInput

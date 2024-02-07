@@ -336,10 +336,10 @@ export const SEARCH_ALL = [...SEARCH_PLACES, ...SEARCH_HOTELS];
 
 //export const urlPrefix = 'http://172.20.10.2/theater/database/';
 
-export const ip = '192.168.114.108';
-//export const urlPrefix = `http://${ip}/theater/database/`;
-export const urlPrefix = `https://dashing-flamingo-meet.ngrok-free.app/theater/database/`;
+export const ip = '192.168.192.100';
+export const urlPrefix = `http://${ip}/theater/database/`;
+// export const urlPrefix = `https://mongchi.share.zrok.io/theater/database/`;
 
-export const testApiPrefix = `http://${ip}:3309/api`;
-export const apiPrefix = `https://dashing-flamingo-meet.ngrok-free.app/api`;
+export const apiPrefix = `http://${ip}/api`;
+// export const apiPrefix = `https://mongchi.share.zrok.io/api`;
 export const vlcPrefix = 'vlc-x-callback://x-callback-url/stream?url=';

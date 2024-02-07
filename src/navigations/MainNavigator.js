@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import { Animated, Platform, StatusBar } from "react-native";
+import { Alert, Animated, Platform, StatusBar } from "react-native";
 import useSWR from 'swr';
 import LoginScreen from '../screens/LoginScreen';
 import tabNavigator from './TabNavigator';
@@ -13,7 +13,8 @@ import {
   HeaderStyleInterpolators,
   TransitionSpecs,
 } from '@react-navigation/stack';
-import {colors} from '../constants/theme';
+import { colors, sizes } from "../constants/theme";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Stack = createStackNavigator();
 
@@ -39,10 +40,18 @@ const MyTransition = ({current, next, layouts}) => {
 };
 
 const MainNavigator = () => {
-  let {data: user} = useSWR(['auth/status', {throwHttpErrors: true}]);
+  let {data: user, isLoading} = useSWR(['auth/status', {throwHttpErrors: true}]);
   let statusBarHidden = Platform.OS !== 'android';
   return (
     <NavigationContainer>
+      <Spinner
+        visible={isLoading}
+        textContent={'Connecting...'}
+        textStyle={{fontSize: sizes.body, color: colors.gray}}
+        overlayColor={'rgba(255,255,255,0.8)'}
+        color={colors.black}
+        animation={'fade'}
+      />
       <StatusBar
         hidden={statusBarHidden}
         backgroundColor={colors.light}

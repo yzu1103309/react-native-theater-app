@@ -17,6 +17,14 @@
         "LSApplicationQueriesSchemes": ["vlc-x-callback"]
       },
       "bundleIdentifier": "com.wilson920430.theater"
-    }
+    },
+    "plugins": [[
+      "expo-build-properties",
+      {
+        "android": {
+          "usesCleartextTraffic": true
+        }
+      }
+    ]]
   }
 }

@@ -49,26 +49,56 @@ const EPListScreen = ({navigation, route}) => {
         <ScrollView style={styles.scroll} alwaysBounceVertical={false}>
           {eps &&
             eps.map((season, index) => {
-              return (
-                <View key={index}>
-                  <Text style={styles.sTitle}>▶ 第 {season.season} 季</Text>
-                  <View style={styles.btnGroup}>
-                    {season.eps.map((ep, index2) => {
-                      return (
-                        <Button
-                          key={index2}
-                          rounded
-                          inverted
-                          style={styles.btn}
-                          onPress={() => openURL(ep.file, season.ext)}
-                          theme={{primaryColor: '#F39C12'}}>
-                          {ep.name}
-                        </Button>
-                      );
-                    })}
+              if (season.season !== 0) {
+                return (
+                  <View key={index}>
+                    <Text style={styles.sTitle}>▶ 第 {season.season} 季</Text>
+                    <View style={styles.btnGroup}>
+                      {season.eps.map((ep, index2) => {
+                        return (
+                          <Button
+                            key={index2}
+                            rounded
+                            inverted
+                            style={styles.btn}
+                            onPress={() => openURL(ep.file, season.ext)}
+                            theme={{primaryColor: '#F39C12'}}>
+                            {ep.name}
+                          </Button>
+                        );
+                      })}
+                    </View>
                   </View>
-                </View>
-              );
+                );
+              } else {
+                return (
+                  <View key={index}>
+                    <Text style={styles.sTitle}>▶ 特別篇</Text>
+                    <View style={styles.btnGroup2}>
+                      {season.eps.map((ep, index2) => {
+                        return (
+                          <View key={index2}>
+                            {ep.message !== '' && index2 === 0 && (
+                              <Text style={styles.msg}>{ep.message}</Text>
+                            )}
+                            {ep.message !== '' && index2 !== 0 && (
+                              <Text style={[styles.msg, {marginTop: '5%'}]}>{ep.message}</Text>
+                            )}
+                            <Button
+                              rounded
+                              inverted
+                              style={styles.longBtn}
+                              onPress={() => openURL(ep.file, season.ext)}
+                              theme={{primaryColor: '#F39C12'}}>
+                              {ep.name}
+                            </Button>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  </View>
+                );
+              }
             })}
         </ScrollView>
       </View>
@@ -101,6 +131,11 @@ const styles = StyleSheet.create({
     marginTop: spacing.s,
     marginLeft: spacing.m,
   },
+  btnGroup2: {
+    marginTop: spacing.s,
+    marginLeft: spacing.m,
+    marginRight: '6%',
+  },
   btn: {
     alignSelf: 'flex-start',
     width: '28%',
@@ -113,6 +148,24 @@ const styles = StyleSheet.create({
       height: 3,
     },
     elevation: 2,
+  },
+  longBtn: {
+    // alignSelf: 'flex-start',
+    // width: '100%',
+    marginLeft: '2%',
+    marginVertical: '1.5%',
+    shadowColor: colors.lightGray,
+    shadowRadius: 2,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 2,
+  },
+  msg: {
+    fontSize: 16,
+    marginLeft: '2%',
   },
   scroll: {
     marginBottom: '10%',

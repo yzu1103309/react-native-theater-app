@@ -8,11 +8,18 @@ import CardFavoriteIcon from '../shared/Card/CardFavoriteIcon';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
+import {urlPrefix} from '../../data';
 
 const CARD_WIDTH = sizes.width / 2 - (spacing.l + spacing.l / 2);
 const CARD_HEIGHT = CARD_WIDTH * 1.85;
 
 const SearchCard = ({item, index}) => {
+  if (!item.thumb) {
+    item.thumb = urlPrefix + item.type + '/' + item.id + '/poster.jpg';
+  }
+  if (!item.fanart) {
+    item.fanart = urlPrefix + item.type + '/' + item.id + '/fanart.jpg';
+  }
   const navigation = useNavigation();
   const even = index % 2 === 0;
   return (
@@ -26,24 +33,24 @@ const SearchCard = ({item, index}) => {
       }}>
       <Card
         onPress={() => {
-          item.type === 'PLACE'
-            ? navigation.navigate('TripDetails', {trip: item})
-            : null;
+          navigation.navigate('MediaDetails', {item: item});
         }}
         style={{
           width: CARD_WIDTH,
           height: CARD_HEIGHT,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
         }}>
-        <CardFavoriteIcon onPress={() => {}} />
+        {/*<CardFavoriteIcon onPress={() => {}} />*/}
         <SharedElement id={`trip.${item.id}.image`} style={styles.media}>
-          <CardMedia source={item.image} borderBottomRadius />
+          <CardMedia source={{uri: item.thumb}} borderBottomRadius />
         </SharedElement>
-        <CardContent>
-          <View style={styles.titleBox}>
-            <Text style={styles.title} numberOfLines={1}>
+        <CardContent style={{height: '20%'}}>
+          <View>
+            <Text style={styles.title} numberOfLines={2}>
               {item.title}
             </Text>
-            <Text style={styles.location}>{item.location}</Text>
+            <Text style={styles.location}>{item.year}</Text>
           </View>
         </CardContent>
       </Card>
@@ -53,10 +60,7 @@ const SearchCard = ({item, index}) => {
 
 const styles = StyleSheet.create({
   media: {
-    flex: 1,
-  },
-  titleBox: {
-    flex: 1,
+    height: '78%',
   },
   title: {
     fontSize: sizes.body,

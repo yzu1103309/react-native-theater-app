@@ -6,31 +6,33 @@ import Tabs from '../components/shared/Tabs';
 import SearchMasonry from '../components/Search/SearchMasonry';
 import {MOVIES, PLACES} from '../data';
 import MainHeader from '../components/shared/MainHeader';
-
-const tabs = [
-  {
-    title: 'All',
-    content: () => <SearchMasonry key="all" list={[...MOVIES, ...PLACES]} />,
-  },
-  {
-    title: 'Movies',
-    content: () => <SearchMasonry key="all" list={MOVIES} />,
-  },
-  {
-    title: 'TV Shows',
-    content: () => <SearchMasonry key="places" list={PLACES} />,
-  },
-];
+import useSWR from "swr";
 
 const SearchScreen = () => {
+  let {data: moviesList} = useSWR(['movies', {throwHttpErrors: true}]);
+  let {data: tvList} = useSWR(['tvshows', {throwHttpErrors: true}]);
+  let tabs = [
+    {
+      title: 'All',
+      content: () => <SearchMasonry key="all" list={[...moviesList, ...tvList]} />,
+    },
+    {
+      title: 'Movies',
+      content: () => <SearchMasonry key="all" list={moviesList} />,
+    },
+    {
+      title: 'TV Shows',
+      content: () => <SearchMasonry key="places" list={tvList} />,
+    },
+  ];
   return (
     <View style={styles.container}>
       <MainHeader />
       <SearchInput />
-      {/*<Tabs items={tabs} />*/}
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Search功能尚未開放</Text>
-      </View>
+      {!!moviesList && !!tvList && <Tabs items={tabs} />}
+      {/*<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>*/}
+      {/*  <Text>Search功能尚未開放</Text>*/}
+      {/*</View>*/}
     </View>
   );
 };

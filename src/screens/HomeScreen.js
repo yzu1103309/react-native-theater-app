@@ -13,6 +13,12 @@ const HomeScreen = () => {
   const type = ['movies', 'tvshows'];
   const [selectedIndex, setSelected] = useState(0);
   let {data} = useSWR([type[selectedIndex], {throwHttpErrors: true}]);
+  if (!!data)
+  {
+    data.sort((a, b) => {
+      return parseInt(b.year) - parseInt(a.year);
+    });
+  }
   //console.log(data);
   return (
     <View style={styles.container}>

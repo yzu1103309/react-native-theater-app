@@ -3,8 +3,7 @@ import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from '../shared/Icon';
 import {colors, spacing, sizes, shadow} from '../../constants/theme';
 
-const SearchInput = () => {
-  const [search, setSearch] = useState('');
+const SearchInput = ({search, setSearch}) => {
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -17,9 +16,9 @@ const SearchInput = () => {
           value={search}
           onChangeText={setSearch}
         />
-        <View style={styles.filter}>
-          <Icon icon="Filter" onPress={() => {}} />
-        </View>
+        {/*<View style={styles.filter}>*/}
+        {/*  <Icon icon="Filter" onPress={() => {}} />*/}
+        {/*</View>*/}
       </View>
     </View>
   );

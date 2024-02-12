@@ -79,10 +79,10 @@ const EPListScreen = ({navigation, route}) => {
                         return (
                           <View key={index2}>
                             {ep.message !== '' && index2 === 0 && (
-                              <Text style={styles.msg}>{ep.message}</Text>
+                              <Text style={styles.msg}>✦ {ep.message}</Text>
                             )}
                             {ep.message !== '' && index2 !== 0 && (
-                              <Text style={[styles.msg, {marginTop: '5%'}]}>{ep.message}</Text>
+                              <Text style={[styles.msg, {marginTop: '5%'}]}>✦ {ep.message}</Text>
                             )}
                             <Button
                               rounded
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   msg: {
-    fontSize: 16,
+    fontSize: 14,
     marginLeft: '2%',
   },
   scroll: {

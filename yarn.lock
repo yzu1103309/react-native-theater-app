@@ -4601,10 +4601,10 @@ expo-modules-core@1.5.13:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-screen-orientation@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-6.4.0.tgz"
-  integrity sha512-4do9XTcBtq3P0O/5HHvQLpLqtnLI2azgURjpivLqSKlPxhEWcxEFdIfFFSr5ndu8TIa6XFVm7uWDBJPd48CVYA==
+expo-screen-orientation@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-6.0.6.tgz"
+  integrity sha512-qiTGX1udJi6hj+8JUP9C27+TJDU7+42HcYcgmGd5hi/iXvIK1YwuCkXFdny+BkiapFb5jQnJCBZfdhMk1fjh+Q==
 
 expo-splash-screen@~0.20.5:
   version "0.20.5"

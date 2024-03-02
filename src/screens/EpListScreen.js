@@ -5,7 +5,9 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Text,
-  ScrollView, Linking,
+  ScrollView,
+  Linking,
+  Platform,
 } from 'react-native';
 import {colors, shadow, sizes, spacing} from '../constants/theme';
 import Icon from '../components/shared/Icon';
@@ -68,8 +70,9 @@ const EPListScreen = ({navigation, route}) => {
                             inverted
                             style={styles.btn}
                             onPress={() => {
-                              // openURL(ep.file, season.ext);
-                              playVid(ep.file, season.ext);
+                              if (Platform.OS === 'android')
+                                playVid(ep.file, season.ext);
+                              else openURL(ep.file, season.ext);
                             }}
                             theme={{primaryColor: '#F39C12'}}>
                             {ep.name}
@@ -98,8 +101,9 @@ const EPListScreen = ({navigation, route}) => {
                               inverted
                               style={styles.longBtn}
                               onPress={() => {
-                                // openURL(ep.file, season.ext);
-                                playVid(ep.file, season.ext);
+                                if (Platform.OS === 'android')
+                                  playVid(ep.file, season.ext);
+                                else openURL(ep.file, season.ext);
                               }}
                               theme={{primaryColor: '#F39C12'}}>
                               {ep.name}

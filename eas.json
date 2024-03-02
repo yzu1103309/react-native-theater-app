@@ -6,7 +6,7 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "env": { "ANDROID_SDK_ROOT": "/home/wilson/Android/Sdk" },
+      "env": { "ANDROID_SDK_ROOT": "$HOME/Android/Sdk" },
       "ios": {
         "buildConfiguration": "Debug"
       }
@@ -17,6 +17,7 @@
       }
     },
     "production": {
+      "env": { "ANDROID_SDK_ROOT": "$HOME/Android/Sdk" },
       "android": {
         "buildType": "apk"
       }

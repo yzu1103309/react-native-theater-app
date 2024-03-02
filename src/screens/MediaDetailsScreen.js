@@ -6,8 +6,7 @@ import {
   Linking,
   Image,
   ImageBackground,
-  ImageBackgroundComponent,
-  ImageBackgroundBase,
+  Platform,
 } from 'react-native';
 import {colors, shadow, sizes, spacing} from '../constants/theme';
 import Icon from '../components/shared/Icon';
@@ -175,8 +174,8 @@ const MediaDetailsScreen = ({navigation, route}) => {
             rounded
             onPress={() => {
               if (item.type === 'movies') {
-                // openURL();
-                playVid();
+                if (Platform.OS === 'android') playVid();
+                else openURL();
               } else {
                 navigation.navigate('EPList', {id: item.id});
               }

@@ -8,13 +8,13 @@ import MediaDetailsScreen from '../screens/MediaDetailsScreen';
 import WebTMDBScreen from '../screens/WebTMDBScreen';
 import WebIMDBScreen from '../screens/WebIMDBScreen';
 import EPListScreen from '../screens/EpListScreen';
+import VideoScreen from "../screens/VideoScreen";
 import {
   createStackNavigator,
   HeaderStyleInterpolators,
   TransitionSpecs,
 } from '@react-navigation/stack';
 import { colors, sizes } from "../constants/theme";
-import Spinner from "react-native-loading-spinner-overlay";
 
 const Stack = createStackNavigator();
 
@@ -89,6 +89,19 @@ const MainNavigator = () => {
         <Stack.Screen
           name="EPList"
           component={EPListScreen}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+            gestureEnabled: false,
+            cardStyle: {backgroundColor: 'transparent'},
+            detachPreviousScreen: false,
+            cardOverlayEnabled: true,
+            cardStyleInterpolator: MyTransition,
+          }}
+        />
+        <Stack.Screen
+          name="Video"
+          component={VideoScreen}
           options={{
             headerShown: false,
             presentation: 'modal',

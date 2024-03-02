@@ -2184,7 +2184,7 @@
   resolved "https://registry.npmjs.org/@react-native/js-polyfills/-/js-polyfills-0.72.1.tgz"
   integrity sha512-cRPZh2rBswFnGt5X5EUEPs0r+pAsXxYsifv/fgy9ZLQokuT52bPH+9xjDR+7TafRua5CttGW83wP4TntRcWNDA==
 
-"@react-native/normalize-color@^2.0.0":
+"@react-native/normalize-color@*", "@react-native/normalize-color@^2.0.0":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@react-native/normalize-color/-/normalize-color-2.1.0.tgz"
   integrity sha512-Z1jQI2NpdFJCVgpY+8Dq/Bt3d+YUi1928Q+/CZm/oh66fzM0RUl54vvuXlPJKybH4pdCZey1eDTPaLHkMPNgWA==
@@ -3941,6 +3941,15 @@ depd@2.0.0:
   resolved "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz"
   integrity sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
 
+deprecated-react-native-prop-types@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-2.3.0.tgz"
+  integrity sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA==
+  dependencies:
+    "@react-native/normalize-color" "*"
+    invariant "*"
+    prop-types "*"
+
 deprecated-react-native-prop-types@4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-4.1.0.tgz"
@@ -4015,6 +4024,11 @@ electron-to-chromium@^1.4.601:
   version "1.4.615"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.615.tgz"
   integrity sha512-/bKPPcgZVUziECqDc+0HkT87+0zhaWSZHNXqF8FLd2lQcptpmUFwoCSWjCdOng9Gdq+afKArPdEg/0ZW461Eng==
+
+eme-encryption-scheme-polyfill@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/eme-encryption-scheme-polyfill/-/eme-encryption-scheme-polyfill-2.1.1.tgz"
+  integrity sha512-njD17wcUrbqCj0ArpLu5zWXtaiupHb/2fIUQGdInf83GlI+Q6mmqaPGLdrke4savKAu15J/z1Tg/ivDgl14g0g==
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -4502,6 +4516,47 @@ expo-constants@~14.4.2:
     "@expo/config" "~8.1.0"
     uuid "^3.3.2"
 
+expo-dev-client@~2.4.13:
+  version "2.4.13"
+  resolved "https://registry.npmjs.org/expo-dev-client/-/expo-dev-client-2.4.13.tgz"
+  integrity sha512-EBNJlPntw+DZy7mKxYvpdrmE2GU4YjcEpxSLpwNn2GDwy7e2xXAC2k/25E13BGy3yKPLo1iBXNgB01uleIDdVg==
+  dependencies:
+    expo-dev-launcher "2.4.15"
+    expo-dev-menu "3.2.4"
+    expo-dev-menu-interface "1.3.0"
+    expo-manifests "~0.7.0"
+    expo-updates-interface "~0.10.0"
+
+expo-dev-launcher@2.4.15:
+  version "2.4.15"
+  resolved "https://registry.npmjs.org/expo-dev-launcher/-/expo-dev-launcher-2.4.15.tgz"
+  integrity sha512-6oF4NsxlKwuafnyIZvVtMp4OTxRu4Arsw6qJ9s4jDjZuGJtGwgEj9ux3R0YLkDPs8xhsK9Awp0q17RqbQzs1qg==
+  dependencies:
+    expo-dev-menu "3.2.3"
+    resolve-from "^5.0.0"
+    semver "^7.5.3"
+
+expo-dev-menu-interface@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/expo-dev-menu-interface/-/expo-dev-menu-interface-1.3.0.tgz"
+  integrity sha512-WtRP7trQ2lizJJTTFXUSGGn1deIeHaYej0sUynvu/uC69VrSP4EeSnYOxbmEO29kuT/MsQBMGu0P/AkMQOqCOg==
+
+expo-dev-menu@3.2.3:
+  version "3.2.3"
+  resolved "https://registry.npmjs.org/expo-dev-menu/-/expo-dev-menu-3.2.3.tgz"
+  integrity sha512-DneF3okTC4AAfAZgaOIylQ/UngSO8SnUT6bRV6nHhJU/jQS1OIP1cZoNW23I100+2yj6x6mobL21PxyiI5VA8g==
+  dependencies:
+    expo-dev-menu-interface "1.3.0"
+    semver "^7.5.3"
+
+expo-dev-menu@3.2.4:
+  version "3.2.4"
+  resolved "https://registry.npmjs.org/expo-dev-menu/-/expo-dev-menu-3.2.4.tgz"
+  integrity sha512-jPvEY4xGTsiVL6A8M6xThNG+tgCHKlDaWqmWHT+wy2EXgFf/7zE0daVYoFms0KJ1XtZc+/DmDRgIPTR86qIGTg==
+  dependencies:
+    expo-dev-menu-interface "1.3.0"
+    semver "^7.5.3"
+
 expo-file-system@~15.4.0, expo-file-system@~15.4.5:
   version "15.4.5"
   resolved "https://registry.npmjs.org/expo-file-system/-/expo-file-system-15.4.5.tgz"
@@ -4516,6 +4571,11 @@ expo-font@~11.4.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
+expo-json-utils@~0.7.0:
+  version "0.7.1"
+  resolved "https://registry.npmjs.org/expo-json-utils/-/expo-json-utils-0.7.1.tgz"
+  integrity sha512-L0lyH8diXQtV0q5BLbFlcoxTqPF5im79xDHPhybB0j36xYdm65hjwRJ4yMrPIN5lR18hj48FUZeONiDHRyEvIg==
+
 expo-keep-awake@~12.3.0:
   version "12.3.0"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz"
@@ -4525,6 +4585,13 @@ expo-linear-gradient@~12.3.0:
   version "12.3.0"
   resolved "https://registry.npmjs.org/expo-linear-gradient/-/expo-linear-gradient-12.3.0.tgz"
   integrity sha512-f9e+Oxe5z7fNQarTBZXilMyswlkbYWQHONVfq8MqmiEnW3h9XsxxmVJLG8uVQSQPUsbW+x1UUT/tnU6mkMWeLg==
+
+expo-manifests@~0.7.0:
+  version "0.7.2"
+  resolved "https://registry.npmjs.org/expo-manifests/-/expo-manifests-0.7.2.tgz"
+  integrity sha512-xlhL0XI2zw3foJ0q2Ra4ieBhU0V2yz+Rv6GpVEaaIHFlIC/Dbx+mKrX5dgenZEMERr/MG7sRJaRbAVB2PaAYhA==
+  dependencies:
+    expo-json-utils "~0.7.0"
 
 expo-modules-autolinking@>=0.8.1, expo-modules-autolinking@1.5.1:
   version "1.5.1"
@@ -4546,6 +4613,11 @@ expo-modules-core@1.5.12:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
+expo-screen-orientation@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.npmjs.org/expo-screen-orientation/-/expo-screen-orientation-6.4.1.tgz"
+  integrity sha512-VM0C9ORNL1aT6Dr2OUeryzV519n0FjtXI2m+HlijOMi1QT2bPg4tBkCd7HLgywU4dZ1Esa46ewUudmk+fOqmMQ==
+
 expo-splash-screen@~0.20.5:
   version "0.20.5"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.20.5.tgz"
@@ -4557,6 +4629,11 @@ expo-status-bar@~1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.6.0.tgz"
   integrity sha512-e//Oi2WPdomMlMDD3skE4+1ZarKCJ/suvcB4Jo/nO427niKug5oppcPNYO+csR6y3ZglGuypS+3pp/hJ+Xp6fQ==
+
+expo-updates-interface@~0.10.0:
+  version "0.10.1"
+  resolved "https://registry.npmjs.org/expo-updates-interface/-/expo-updates-interface-0.10.1.tgz"
+  integrity sha512-I6JMR7EgjXwckrydDmrkBEX/iw750dcqpzQVsjznYWfi0HTEOxajLHB90fBFqQkUV5i5s4Fd3hYQ1Cn0oMzUbA==
 
 expo@*, expo@~49.0.18:
   version "49.0.21"
@@ -6450,6 +6527,11 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/keymirror/-/keymirror-0.1.1.tgz"
+  integrity sha512-vIkZAFWoDijgQT/Nvl2AHCMmnegN2ehgTPYuyy2hWQkQSntI0S7ESYqdLkoSe1HyEBFHHkCgSIvVdSEiWwKvCg==
+
 keyv@^4.5.3:
   version "4.5.4"
   resolved "https://registry.npmjs.org/keyv/-/keyv-4.5.4.tgz"
@@ -8070,6 +8152,16 @@ react-native-vector-icons@*, react-native-vector-icons@^10.0.3:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
+react-native-video@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npmjs.org/react-native-video/-/react-native-video-5.2.1.tgz"
+  integrity sha512-aJlr9MeTuQ0LpZ4n+EC9RvhoKeiPbLtI2Rxy8u7zo/wzGevbRpWHSBj9xZ5YDBXnAVXzuqyNIkGhdw7bfdIBZw==
+  dependencies:
+    deprecated-react-native-prop-types "^2.2.0"
+    keymirror "^0.1.1"
+    prop-types "^15.7.2"
+    shaka-player "^2.5.9"
+
 react-native-webview@13.2.2:
   version "13.2.2"
   resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-13.2.2.tgz"
@@ -8655,6 +8747,13 @@ setprototypeof@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
+
+shaka-player@^2.5.9:
+  version "2.5.23"
+  resolved "https://registry.npmjs.org/shaka-player/-/shaka-player-2.5.23.tgz"
+  integrity sha512-3MC9k0OXJGw8AZ4n/ZNCZS2yDxx+3as5KgH6Tx4Q5TRboTBBCu6dYPI5vp1DxKeyU12MBN1Zcbs7AKzXv2EnCg==
+  dependencies:
+    eme-encryption-scheme-polyfill "^2.0.1"
 
 shallow-clone@^3.0.0:
   version "3.0.1"

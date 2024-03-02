@@ -31,6 +31,12 @@ const EPListScreen = ({navigation, route}) => {
     await Linking.openURL(url);
   }
 
+  function playVid(fname, ext) {
+    const source = urlPrefix + `tvshows/${id}/${fname + ext}`;
+    const sub_source = `${urlPrefix}tvshows/${id}/${fname}.srt`;
+    navigation.navigate('Video', {source, sub_source});
+  }
+
   return (
     <View style={styles.container}>
       <Spinner
@@ -61,7 +67,10 @@ const EPListScreen = ({navigation, route}) => {
                             rounded
                             inverted
                             style={styles.btn}
-                            onPress={() => openURL(ep.file, season.ext)}
+                            onPress={() => {
+                              // openURL(ep.file, season.ext);
+                              playVid(ep.file, season.ext);
+                            }}
                             theme={{primaryColor: '#F39C12'}}>
                             {ep.name}
                           </Button>
@@ -88,7 +97,10 @@ const EPListScreen = ({navigation, route}) => {
                               rounded
                               inverted
                               style={styles.longBtn}
-                              onPress={() => openURL(ep.file, season.ext)}
+                              onPress={() => {
+                                // openURL(ep.file, season.ext);
+                                playVid(ep.file, season.ext);
+                              }}
                               theme={{primaryColor: '#F39C12'}}>
                               {ep.name}
                             </Button>

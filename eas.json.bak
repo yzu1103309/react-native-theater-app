@@ -17,6 +17,7 @@
       }
     },
     "production": {
+      "env": { "ANDROID_SDK_ROOT": "/home/wilson/Android/Sdk" },
       "android": {
         "buildType": "apk"
       }

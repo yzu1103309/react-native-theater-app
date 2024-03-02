@@ -36,6 +36,11 @@ const MediaDetailsScreen = ({navigation, route}) => {
     console.log(url, supported);
     await Linking.openURL(url);
   }
+  function playVid() {
+    const source = urlPrefix + item.type + `/${item.id}/movie${item.ext}`;
+    const sub_source = `${urlPrefix + item.type}/${item.id}/movie${item.subExt}`;
+    navigation.navigate('Video', {source, sub_source});
+  }
 
   return (
     <View style={styles.container}>
@@ -170,7 +175,8 @@ const MediaDetailsScreen = ({navigation, route}) => {
             rounded
             onPress={() => {
               if (item.type === 'movies') {
-                openURL();
+                // openURL();
+                playVid();
               } else {
                 navigation.navigate('EPList', {id: item.id});
               }

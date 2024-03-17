@@ -14,7 +14,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
 import FavoriteButton from '../components/shared/FavoriteButton';
 import {Button} from 'react-native-ios-kit';
-import {urlPrefix, vlcPrefix } from "../data";
+import {urlPrefix, vlcPrefix} from "../data";
 import {LinearGradient} from 'expo-linear-gradient';
 import Stars from 'react-native-stars';
 import Spinner from 'react-native-loading-spinner-overlay';

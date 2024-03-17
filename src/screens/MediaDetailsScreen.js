@@ -14,13 +14,16 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
 import FavoriteButton from '../components/shared/FavoriteButton';
 import {Button} from 'react-native-ios-kit';
-import {urlPrefix, vlcPrefix} from '../data';
+import {urlPrefix, vlcPrefix } from "../data";
 import {LinearGradient} from 'expo-linear-gradient';
 import Stars from 'react-native-stars';
 import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MediaDetailsScreen = ({navigation, route}) => {
   const [loading, setLoading] = useState(0);
+  const [external, setExternal] = useState(false);
+  const [fromFile, setFromFile] = useState(false);
   const insets = useSafeAreaInsets();
   const {item} = route.params;
   async function openURL() {
@@ -39,6 +42,18 @@ const MediaDetailsScreen = ({navigation, route}) => {
     const source = urlPrefix + item.type + `/${item.id}/movie${item.ext}`;
     const sub_source = `${urlPrefix + item.type}/${item.id}/movie${item.subExt}`;
     navigation.navigate('Video', {source, sub_source});
+  }
+
+  if (!fromFile) {
+    console.log('read config from file');
+    AsyncStorage.getItem('config').then(config => {
+      config = JSON.parse(config);
+      if (config && config.externalPlayback !== external) {
+        setExternal(config.externalPlayback);
+        console.log('stateChange');
+      }
+    });
+    setFromFile(true);
   }
 
   return (
@@ -174,7 +189,7 @@ const MediaDetailsScreen = ({navigation, route}) => {
             rounded
             onPress={() => {
               if (item.type === 'movies') {
-                if (Platform.OS === 'android') playVid();
+                if (Platform.OS === 'android' && !external) playVid();
                 else openURL();
               } else {
                 navigation.navigate('EPList', {id: item.id});

@@ -8,11 +8,16 @@ const ArrowLeft = require('../../assets/icons/Arrow_Left.png');
 const Location = require('../../assets/icons/Location.png');
 const Filter = require('../../assets/icons/Filter.png');
 const Back = require('../../assets/icons/Back.png');
-const User = require('../../node_modules/@tabler/icons-png/icons/user.png');
+const Logout = require('../../node_modules/@tabler/icons-png/icons/logout.png');
 const Send = require('../../node_modules/@tabler/icons-png/icons/send.png');
 const FullStar = require('../../node_modules/@tabler/icons-png/icons/star-filled.png');
 const EmptyStar = require('../../node_modules/@tabler/icons-png/icons/star.png');
 const X = require('../../node_modules/@tabler/icons-png/icons/x.png');
+const External = require('../../node_modules/@tabler/icons-png/icons/external-link.png');
+const ExternalOff = require('../../node_modules/@tabler/icons-png/icons/external-link-off.png');
+const Admin = require('../../node_modules/@tabler/icons-png/icons/lock-square.png');
+const User = require('../../node_modules/@tabler/icons-png/icons/user.png');
+const Invite = require('../../node_modules/@tabler/icons-png/icons/user-plus.png');
 
 export default {
   Home,
@@ -25,9 +30,14 @@ export default {
   Location,
   Filter,
   Back,
-  User,
+  Logout,
   Send,
   FullStar,
   EmptyStar,
   X,
+  External,
+  ExternalOff,
+  Admin,
+  User,
+  Invite,
 };

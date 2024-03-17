@@ -43,9 +43,9 @@ const LoginScreen = () => {
         })
         .catch(e => {
           if (e instanceof HTTPError && e.response.status === 403) {
-            Alert.alert('帳號或密碼錯誤！');
+            Alert.alert('', '帳號或密碼錯誤！');
           } else {
-            Alert.alert('發生錯誤 \n 請檢查網路及VPN狀態');
+            Alert.alert('', '發生錯誤 \n 請檢查網路及VPN狀態');
           }
         });
       setLoading(false);

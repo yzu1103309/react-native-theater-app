@@ -17,11 +17,19 @@ import {WebView} from 'react-native-webview';
 import Spinner from 'react-native-loading-spinner-overlay';
 import useSWR, {useSWRConfig} from 'swr';
 import {Button} from 'react-native-ios-kit';
-import {urlPrefix, vlcPrefix} from "../data";
+import {urlPrefix, vlcPrefix} from '../data';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {client} from '../apis/common';
 
 const EPListScreen = ({navigation, route}) => {
   const id = route.params.id;
   let {data: eps} = useSWR(['tvshow/' + id + '/eps', {throwHttpErrors: true}]);
+  let {data: watched, mutate: refreshWatched} = useSWR([
+    'tvshow/' + id + '/watched',
+    {throwHttpErrors: true},
+  ]);
+  const [external, setExternal] = useState(false);
+  const [fromFile, setFromFile] = useState(false);
   console.log(!eps);
   async function openURL(fname, ext) {
     const url =
@@ -39,6 +47,34 @@ const EPListScreen = ({navigation, route}) => {
     navigation.navigate('Video', {source, sub_source});
   }
 
+  let watchedFound = false;
+  function findWatched(watched, current) {
+    if (watchedFound) {
+      return watchedFound;
+    } else {
+      if (watched === 'S0E0') {
+        watchedFound = true;
+        return watchedFound;
+      } else if (watched === current) {
+        watchedFound = true;
+        return !watchedFound; //current should be gray
+      }
+    }
+  }
+
+  if (!fromFile) {
+    console.log('read config from file');
+    AsyncStorage.getItem('config').then(config => {
+      config = JSON.parse(config);
+      if (config && config.externalPlayback !== external) {
+        setExternal(config.externalPlayback);
+        console.log('stateChange');
+      }
+    });
+    setFromFile(true);
+  }
+
+  console.log('render');
   return (
     <View style={styles.container}>
       <Spinner
@@ -56,8 +92,10 @@ const EPListScreen = ({navigation, route}) => {
         </View>
         <ScrollView style={styles.scroll} alwaysBounceVertical={false}>
           {eps &&
+            watched &&
             eps.map((season, index) => {
               if (season.season !== 0) {
+                console.log(watched)
                 return (
                   <View key={index}>
                     <Text style={styles.sTitle}>▶ 第 {season.season} 季</Text>
@@ -69,13 +107,19 @@ const EPListScreen = ({navigation, route}) => {
                             rounded
                             inverted
                             style={styles.btn}
-                            onPress={() => {
-                              if (Platform.OS === 'android')
+                            onPress={async () => {
+                              if (Platform.OS === 'android' && !external) {
                                 playVid(ep.file, season.ext);
-                              else openURL(ep.file, season.ext);
+                              } else {
+                                openURL(ep.file, season.ext);
+                              }
+                              await client.post(`tvshow/${id}/watched/${ep.file}`);
+                              await refreshWatched();
                             }}
-                            theme={{primaryColor: '#F39C12'}}>
-                            {ep.name}
+                            theme={{
+                              primaryColor: '#F39C12',
+                            }}>
+                            {(!findWatched(watched.ep, ep.file) || !watchedFound ? '✓ ' : '') + ep.name}
                           </Button>
                         );
                       })}
@@ -94,16 +138,20 @@ const EPListScreen = ({navigation, route}) => {
                               <Text style={styles.msg}>✦ {ep.message}</Text>
                             )}
                             {ep.message !== '' && index2 !== 0 && (
-                              <Text style={[styles.msg, {marginTop: '5%'}]}>✦ {ep.message}</Text>
+                              <Text style={[styles.msg, {marginTop: '5%'}]}>
+                                ✦ {ep.message}
+                              </Text>
                             )}
                             <Button
                               rounded
                               inverted
                               style={styles.longBtn}
                               onPress={() => {
-                                if (Platform.OS === 'android')
+                                if (Platform.OS === 'android' && !external) {
                                   playVid(ep.file, season.ext);
-                                else openURL(ep.file, season.ext);
+                                } else {
+                                  openURL(ep.file, season.ext);
+                                }
                               }}
                               theme={{primaryColor: '#F39C12'}}>
                               {ep.name}

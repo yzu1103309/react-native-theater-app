@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {View, StyleSheet, BackHandler} from 'react-native';
 import Video, {TextTrackType} from 'react-native-video';
 import { colors, shadow, sizes, spacing } from "../constants/theme";
@@ -6,6 +6,7 @@ import Icon from '../components/shared/Icon';
 import * as Animatable from 'react-native-animatable';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as ScreenOrientation from 'expo-screen-orientation';
+import Subtitles from 'react-native-subtitles';
 
 const VideoScreen = ({navigation, route}) => {
   useEffect(() => {
@@ -24,8 +25,8 @@ const VideoScreen = ({navigation, route}) => {
     };
   }, [navigation]);
   let {source, sub_source} = route.params;
-  console.log(sub_source);
   const insets = useSafeAreaInsets();
+  const [time, setTime] = useState(0);
   return (
     <View style={{flex: 1, backgroundColor: colors.black}}>
       <Animatable.View
@@ -59,19 +60,36 @@ const VideoScreen = ({navigation, route}) => {
         style={styles.backgroundVideo}
         controls={true}
         resizeMode={'contain'}
-        textTracks={[
-          {
-            title: 'CC',
-            language: 'zh',
-            type: TextTrackType.SRT,
-            uri: sub_source,
-          },
-        ]}
-        selectedTextTrack={{
-          type: 'title',
-          value: 'CC',
+        // textTracks={[
+        //   {
+        //     title: 'CC',
+        //     language: 'zh',
+        //     type: TextTrackType.SRT,
+        //     uri: sub_source,
+        //   },
+        // ]}
+        // selectedTextTrack={{
+        //   type: 'title',
+        //   value: 'CC',
+        // }}
+        onProgress={res => {
+          setTime(res.currentTime);
         }}
+        progressUpdateInterval={100}
       />
+      <View style={{flex: 1, justifyContent: 'flex-end'}}>
+        <Subtitles
+          selectedsubtitle={{file: sub_source}}
+          currentTime={time}
+          textStyle={{
+            fontSize: 26,
+            fontWeight: 'bold',
+            textShadowColor: '#000',
+            textShadowOffset: {width: 0, height: 0},
+            textShadowRadius: 8,
+          }}
+        />
+      </View>
     </View>
   );
 };

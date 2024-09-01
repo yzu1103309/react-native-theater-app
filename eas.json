@@ -4,6 +4,7 @@
   },
   "build": {
     "development": {
+      "env": { "ANDROID_SDK_ROOT": "/home/wilson/Android/Sdk" },
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -16,9 +17,16 @@
       }
     },
     "production": {
+      "env": { "ANDROID_SDK_ROOT": "/home/wilson/Android/Sdk" },
       "android": {
         "buildType": "apk"
       }
+    },
+    "custom": {
+      "ios": {
+        "config": "custom.yml"
+      },
+      "withoutCredentials": true
     }
   },
   "submit": {

@@ -1,0 +1,48 @@
+build:
+  name: Customized iOS build
+  steps:
+    - eas/checkout
+
+    - run:
+        name: Install dependencies
+        command: npm install
+
+    - run:
+        env:
+          CI: '1'
+        name: Run expo prebuild
+        command: npx expo prebuild --no-install --platform ios
+
+    - run:
+        name: Install pods
+        working_directory: ./ios
+        command: pod install
+
+    - eas/generate_gymfile_from_template:
+        inputs:
+          template: |
+            suppress_xcode_output(true)
+            clean(<%- CLEAN %>)
+            scheme("<%- SCHEME %>")
+            <% if (BUILD_CONFIGURATION) { %>
+            configuration("<%- BUILD_CONFIGURATION %>")
+            <% } %>
+            skip_package_ipa(true)
+            skip_archive(true)
+            derived_data_path("<%- DERIVED_DATA_PATH %>")
+            skip_codesigning(true)
+            xcargs("-IDECustomBuildProductsPath=\"\"")
+            disable_xcpretty(true)
+            buildlog_path("<%- LOGS_DIRECTORY %>")
+            output_directory("<%- OUTPUT_DIRECTORY %>")
+    - eas/run_fastlane
+    - run:
+        id: locate_app_bundle
+        name: Locate application bundle
+        outputs: [bundle_path]
+        command: set-output bundle_path ios/build/Build/Products/*/*.app
+
+    - eas/upload_artifact:
+        name: Upload application bundle
+        inputs:
+          path: ${ steps.locate_app_bundle.bundle_path }

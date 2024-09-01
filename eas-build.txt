@@ -1,0 +1,1 @@
+eas build --local --output=./app-build.apk --platform=android --profile=production

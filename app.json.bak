@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Theater",
+    "slug": "theater",
+    "icon": "./assets/icons/icon.png",
+    "orientation": "portrait",
+    "extra": {
+      "eas": {
+        "projectId": "bbbf098e-32ec-44fa-85c9-e23ab83f45b8"
+      }
+    },
+    "android": {
+      "package": "com.wilson920430.theater"
+    },
+    "ios": {
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["vlc-x-callback"]
+      },
+      "bundleIdentifier": "com.wilson920430.theater"
+    },
+    "plugins": [[
+      "expo-build-properties",
+      {
+        "android": {
+          "usesCleartextTraffic": true
+        }
+      }
+    ]]
+  }
+}

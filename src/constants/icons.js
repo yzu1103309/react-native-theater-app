@@ -18,6 +18,7 @@ const ExternalOff = require('../../node_modules/@tabler/icons-png/icons/external
 const Admin = require('../../node_modules/@tabler/icons-png/icons/lock-square.png');
 const User = require('../../node_modules/@tabler/icons-png/icons/user.png');
 const Invite = require('../../node_modules/@tabler/icons-png/icons/user-plus.png');
+const Info = require('../../node_modules/@tabler/icons-png/icons/info-circle.png');
 
 export default {
   Home,
@@ -40,4 +41,5 @@ export default {
   Admin,
   User,
   Invite,
+  Info,
 };

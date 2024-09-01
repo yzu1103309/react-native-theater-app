@@ -18,16 +18,20 @@ import {Switch} from 'react-native-ios-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Video from 'react-native-video';
 import {Link} from '@react-navigation/native';
-import {vlcPrefix} from '../data';
+import { version, vlcPrefix } from "../data";
 import InviteDialog from "../components/UserPage/InviteDialog";
+import DownloadProgress from "../components/shared/downloadProgress";
+import { downloadApk } from "../apis/downloadApk";
 
 const UserScreen = () => {
+  var RNFS = require('react-native-fs');
   const {mutate} = useSWRConfig();
   let {data: user} = useSWR(['auth/status', {throwHttpErrors: true}]);
   const clearCache = () => mutate(() => true, undefined, {revalidate: false});
   const [external, setExternal] = useState(false);
   const [fromFile, setFromFile] = useState(false);
   const [showDialog, setDialog] = useState(false);
+  const [download, setDownload] = useState({visible: false, progress: 0})
 
   if (!fromFile) {
     console.log('read config from file');
@@ -67,8 +71,8 @@ const UserScreen = () => {
           {
             text: '尚未安裝，保持關閉',
             style: 'cancel',
-            onPress: () => {
-              Alert.alert('', '是否前往下載 stream-url-handler？', [
+            onPress: async () => {
+              Alert.alert('', '是否下載 stream-url-handler？', [
                 {
                   text: '否',
                   style: 'cancel',
@@ -76,9 +80,12 @@ const UserScreen = () => {
                 {
                   text: '是',
                   onPress: async () => {
-                    await Linking.openURL(
-                      'https://github.com/yzu1103309/stream-url-handler/releases/tag/v1.0.0',
+                    downloadApk(
+                      'https://github.com/yzu1103309/stream-url-handler/releases/download/v1.0.0/stream-url-handler.apk',
+                      RNFS.TemporaryDirectoryPath + '/stream-url-handler.apk',
+                      setDownload,
                     );
+                    setDownload({visible: true, progress: 0});
                   },
                 },
               ]);
@@ -119,9 +126,16 @@ const UserScreen = () => {
     }
   }
 
+  function showInfo()
+  {
+    const info = require('../../update-log.json');
+    Alert.alert(`About ${version} Update`, info.text);
+  }
+
   return (
     <View style={styles.container}>
       <InviteDialog visible={showDialog} setVisible={setDialog} />
+      <DownloadProgress downloadState={download} />
       <MainHeader title="Home" />
       <View style={styles.topContainer}>
         <Text style={styles.title}>User Page</Text>
@@ -170,6 +184,23 @@ const UserScreen = () => {
             </ListItem>
           </>
         )}
+        <Text style={[styles.smallTitle, {marginTop: spacing.l}]}>Info: </Text>
+        <ListItem
+          onPress={showInfo}
+          bottomDivider
+          containerStyle={styles.listItem}>
+          <Icon
+            icon={'Info'}
+            size={24}
+            style={{
+              tintColor: colors.primary,
+              marginLeft: spacing.m,
+            }}
+          />
+          <ListItem.Content>
+            <ListItem.Title>About This Update</ListItem.Title>
+          </ListItem.Content>
+        </ListItem>
         {!!user.admin && (
           <>
             <Text style={[styles.smallTitle, {marginTop: spacing.l}]}>
@@ -184,7 +215,7 @@ const UserScreen = () => {
                 size={24}
                 style={{
                   tintColor: colors.primary,
-                  marginLeft: 10,
+                  marginLeft: spacing.m,
                 }}
               />
               <ListItem.Content>

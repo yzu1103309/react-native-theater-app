@@ -1,1 +1,3 @@
 eas build --local --output=./app-build.apk --platform=android --profile=production
+
+eas build -p ios -e custom

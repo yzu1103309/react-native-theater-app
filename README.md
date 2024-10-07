@@ -1,6 +1,6 @@
 # React-Native-Experimental-App
 
-On Repository, compile for both Android and iOS.
+One Repository, compile for both Android and iOS.
 
 ![image](https://github.com/user-attachments/assets/79b1537c-f490-4794-96cf-da607f96b137)
 
